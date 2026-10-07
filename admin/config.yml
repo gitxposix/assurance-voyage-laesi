@@ -1,0 +1,27 @@
+# DEMONSTRATION ONLY: edits here do not update laesi.ca.
+backend:
+  name: test-repo
+locale: fr
+media_folder: assets/uploads
+public_folder: /assets/uploads
+collections:
+  - name: informations
+    label: Informations du site
+    files:
+      - name: babillard
+        label: Babillard LAESI
+        file: assets/babillard.json
+        format: json
+        fields:
+          - label: Français
+            name: fr
+            widget: object
+            fields:
+              - {label: Titre, name: title, widget: string}
+              - {label: Message, name: message, widget: text}
+          - label: Espagnol
+            name: es
+            widget: object
+            fields:
+              - {label: Titre, name: title, widget: string}
+              - {label: Message, name: message, widget: text}

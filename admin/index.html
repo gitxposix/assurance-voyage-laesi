@@ -1,0 +1,4 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>LAESI · Babillard</title></head><body><script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script><script>
+CMS.registerPreviewStyle('body{font-family:Arial,sans-serif;color:#173b30;padding:24px}article{border:1px solid #d6e4dc;border-radius:18px;padding:24px;margin-bottom:24px}p{white-space:pre-wrap;line-height:1.6}',{raw:true});
+CMS.registerPreviewTemplate('babillard',function(props){const data=props.entry.getIn(['data']).toJS();return h('div',{},['fr','es'].map(lang=>h('article',{key:lang},h('small',{},lang==='fr'?'LE BABILLARD LAESI · FRANÇAIS':'EL TABLÓN LAESI · ESPAÑOL'),h('h2',{},(data[lang]||{}).title||''),h('p',{},(data[lang]||{}).message||''))));});
+</script></body></html>
