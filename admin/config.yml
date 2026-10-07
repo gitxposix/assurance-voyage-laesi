@@ -1,6 +1,6 @@
 backend:
   name: github
- repo: gitxposix/assurance-voyage-laesi
+  repo: gitxposix/assurance-voyage-laesi
   branch: desarrollo
 locale: fr
 media_folder: assets/uploads
