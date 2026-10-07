@@ -1,6 +1,7 @@
-# DEMONSTRATION ONLY: edits here do not update laesi.ca.
 backend:
-  name: test-repo
+  name: github
+ repo: gitxposix/assurance-voyage-laesi
+  branch: desarrollo
 locale: fr
 media_folder: assets/uploads
 public_folder: /assets/uploads
