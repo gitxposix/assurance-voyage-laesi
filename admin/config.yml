@@ -3,8 +3,11 @@ backend:
   repo: gitxposix/assurance-voyage-laesi
   branch: desarrollo
 locale: fr
-media_folder: assets/uploads
-public_folder: /assets/uploads
+media_folder: assets/uploads/babillard
+public_folder: /assets/uploads/babillard
+media_library:
+  config:
+    max_file_size: 512000
 collections:
   - name: informations
     label: Informations du site
@@ -14,15 +17,27 @@ collections:
         file: assets/babillard.json
         format: json
         fields:
+          - label: Image du babillard (facultative)
+            name: image
+            widget: image
+            required: false
+            choose_url: false
+            hint: "Une seule image pour les deux langues. Maximum 500 Ko. Format conseillé : 1200 × 800 pixels."
+            media_library:
+              allow_multiple: false
+              config:
+                max_file_size: 512000
           - label: Français
             name: fr
             widget: object
             fields:
               - {label: Titre, name: title, widget: string}
+              - {label: Description de l’image, name: image_alt, widget: string, required: false}
               - {label: Message, name: message, widget: text}
           - label: Espagnol
             name: es
             widget: object
             fields:
               - {label: Titre, name: title, widget: string}
+              - {label: Description de l’image, name: image_alt, widget: string, required: false}
               - {label: Message, name: message, widget: text}
