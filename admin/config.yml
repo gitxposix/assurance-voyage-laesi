@@ -5,9 +5,6 @@ backend:
 locale: fr
 media_folder: assets/uploads/babillard
 public_folder: /assets/uploads/babillard
-media_library:
-  config:
-    max_file_size: 512000
 collections:
   - name: informations
     label: Informations du site
