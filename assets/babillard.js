@@ -38,7 +38,8 @@
     let img = box.querySelector('[data-babillard-image]');
     const path = typeof content.image === 'string' ? content.image : '';
     // Only images from the bulletin upload folder are rendered.
-    const valid = /^\/?assets\/uploads\/babillard\/[^?#]+$/i.test(path) && !path.includes('..');
+    const embedded = /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(path);
+    const valid = embedded || /^\/?assets\/uploads\/babillard\/[^?#]+$/i.test(path) && !path.includes('..');
     if (!valid) { if (img) img.remove(); box.classList.remove('babillard-with-image'); return; }
     box.classList.add('babillard-with-image');
     if (!img) {
@@ -49,12 +50,13 @@
       img.onerror = () => { img.remove(); box.classList.remove('babillard-with-image'); };
       box.appendChild(img);
     }
-    const url = new URL(path.replace(/^\//, ''), siteURL).href;
+    const url = embedded ? path : new URL(path.replace(/^\//, ''), siteURL).href;
     if (img.src !== url) img.src = url;
     img.alt = typeof item.image_alt === 'string' ? item.image_alt : '';
   };
-  fetch(new URL('babillard.json', scriptURL), {cache:'no-store'})
+  fetch(new URL('.netlify/functions/babillard', siteURL), {cache:'no-store'})
     .then(r => { if (!r.ok) throw Error('unavailable'); return r.json(); })
+    .catch(() => fetch(new URL('babillard.json', scriptURL), {cache:'no-store'}).then(r => {if (!r.ok) throw Error('unavailable'); return r.json();}))
     .then(data => {
       if (!['fr','es'].every(l => data[l] && typeof data[l].title === 'string' && typeof data[l].message === 'string')) throw Error('invalid');
       content = data;

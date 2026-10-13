@@ -1,0 +1,38 @@
+LAESI — Acceso exclusivo al babillard
+
+INSTALACIÓN (Luis)
+1. En GitHub, abrir gitxposix/assurance-voyage-laesi y seleccionar desarrollo.
+2. Cargar los archivos y carpetas de este paquete en la raíz, conservando su estructura. No cargar el ZIP directamente ni incluir node_modules. No cargar en main.
+3. Confirmar los cambios (commit): Console babillard — accès Eduardo.
+4. Esperar un despliegue de Netlify exitoso. netlify.toml establece el build npm run build y las funciones. Netlify instala las dependencias del package.json automáticamente.
+5. Abrir /admin/ en Netlify: debe mostrar el formulario de correo y contraseña, sin el inicio de sesión GitHub.
+6. Identity debe estar activado, con Registration: Invite only y Email confirmation: Required.
+7. Invitar a eduardosoto30@hotmail.com desde Identity > Users. No invitarlo como miembro del equipo Netlify ni como colaborador GitHub.
+8. Eduardo abre el enlace de invitación y crea su contraseña (mínimo 12 caracteres). Los enlaces que llegan al inicio se redirigen a /admin/ conservando el token.
+9. Probar publicación con ambos idiomas y una imagen, comprobar en la web y volver a publicar el contenido definitivo.
+
+ARCHIVOS
+admin/index.html: nueva consola (sustituye Decap).
+admin/console-source.js y console.js: autenticación, formulario y activación.
+assets/auth-redirect.js: envía los enlaces de invitación/recuperación a admin.
+assets/babillard.js: lee el contenido publicado desde la función.
+index.html y autres-assurances.html: páginas actuales con redirección de activación.
+netlify/functions/babillard.mjs: lectura pública y publicación autenticada.
+netlify/lib/babillard-core.mjs: valida contenido y permisos.
+netlify/lib/initial.json: contenido inicial; no reemplaza publicaciones posteriores.
+package.json, package-lock.json y netlify.toml: dependencias y despliegue.
+Los demás archivos e imágenes del repositorio se mantienen. admin/config.yml antiguo no se utiliza con esta consola.
+
+USO
+Consola: https://fluffy-kataifi-dc826d.netlify.app/admin/
+Usuario autorizado: eduardosoto30@hotmail.com
+Título y mensaje independientes en FR y ES. Una imagen compartida.
+La consola reduce imágenes JPG/PNG/WebP de hasta 5 MiB. El servidor comprueba y reduce a máximo 1200 × 800 px y 512000 bytes.
+Publicar guarda ambos idiomas y la imagen juntos en Netlify Blobs. Recargar la web para ver el cambio. No crea commits GitHub ni requiere redeploy.
+Las publicaciones persisten entre despliegues. Solo se permite escribir en el espacio del babillard; no existe API de modificación de otros archivos.
+La consola permite descargar una copia JSON. Netlify conserva además la publicación inmediatamente anterior bajo la clave previous del almacén laesi-babillard.
+Si el contenido dinámico no está disponible, la web puede usar el último archivo estático assets/babillard.json existente como respaldo.
+
+VERIFICACIÓN
+Pruebas locales: acceso anónimo rechazado al escribir, usuario diferente rechazado, origen ajeno rechazado, campos ajenos rechazados, imágenes arbitrarias/SVG/varias rechazadas, imagen inválida rechazada, redimensionado verificado, escritura y lectura del contenido verificadas con almacenamiento simulado. Bundles navegador/servidor e inline JavaScript verificados.
+Pendiente: despliegue real, entrega del correo, aceptación de invitación, recuperación y publicación en el proyecto Netlify.
